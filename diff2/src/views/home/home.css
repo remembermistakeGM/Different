@@ -1,3 +1,7 @@
+.home_header{
+
+    height: 120px;
+}
 .home_search {
     position: absolute;
     top: 0; 
@@ -138,7 +142,7 @@
      
   }
   .home_box{
-      margin-top: 50px;
+     
   }
   .home_box .box-item{
     min-height: 300px;   

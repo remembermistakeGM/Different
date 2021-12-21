@@ -1,6 +1,6 @@
 <template>
   <div class="home-container" style="">
-      <div class="home_header" >
+      <div class="home_header" style="display:none">
     <div class="home_search">
       <input type="text" placeholder="Search..." />
       <div class="search"></div>
@@ -17,19 +17,24 @@
 </div>
       <div id="wrap" :style="{ height: screenHeight + 'px' }">
       <div id="main" :style="{ top: nowTop + 'px' }">
-
-      <div v-for="(item,index) in list" :key='index' style="background-color: #1b6d85" id="page1" class="page">
+      <!-- <ul id="pageUl" type="circle"> 
+        <li id="pageUlLi1" class="pageUlLi" :class="{'active': curIndex == 1}">&nbsp;</li>
+        <li id="pageUlLi2" class="pageUlLi" :class="{'active': curIndex == 2}">&nbsp;</li>
+        <li id="pageUlLi3" class="pageUlLi" :class="{'active': curIndex == 3}">&nbsp;</li>
+        <li id="pageUlLi4" class="pageUlLi" :class="{'active': curIndex == 4}">&nbsp;</li>
+        <li id="pageUlLi5" class="pageUlLi" :class="{'active': curIndex == 5}">&nbsp;</li>
+      </ul> -->
+      <div style="background-color: #1b6d85" id="page1" class="page">
   
-    <div class="home_box" >
+    <div class="home_box">
         <div class="box-item-group"  @mouseenter="enter" @mouseleave="leave">
       <el-row>
         <el-col :span="12" class="box-item-cell">
           <div class="box-item">
             <img
               class="box-item-img"
-              :src="item.old_image"
+              src="https://www.designhotels.com/media/rmijxduy/popular-theme-city-teaser.jpg?anchor=center&mode=crop&width=768&height=750&rnd=132314200954500000s"
               alt=""
-               :style="{ height: screenHeight + 'px' }"
             />
           </div>
           <div class="box-item-section">
@@ -56,9 +61,8 @@
           <div class="box-item">
             <img
               class="box-item-img"
-              :src="item.now_image"
+              src="https://www.designhotels.com/media/rmijxduy/popular-theme-city-teaser.jpg?anchor=center&mode=crop&width=768&height=750&rnd=132314200954500000s"
               alt=""
-              :style="{ height: screenHeight + 'px' }"
             />
           </div>
           <div class="box-item-section">
@@ -70,7 +74,12 @@
       </div>
     </div>
       </div>
-     
+      <div style="background-color: #5cb85c" id="page2" class="page">
+      </div>
+      <div style="background-color: #8a6d3b" id="page3" class="page">
+      </div>
+      <div style="background-color: #337ab7" id="page4" class="page"></div>
+      <div style="background-color: #66512c" id="page5" class="page"></div>
     </div>
   </div>
 <!-- 
@@ -130,14 +139,11 @@ export default {
   data() {
     return {
       list: [
-        {id:"123",
-        old_image:'https://www.designhotels.com/media/rmijxduy/popular-theme-city-teaser.jpg?anchor=center&mode=crop&width=768&height=750&rnd=132314200954500000s',
-        now_image:"https://www.designhotels.com/media/hvce4cdy/01-cretanmalia-agapi-costantza-sbokou-pier.jpg?center=0.509627971580746,0.21166666666666667&mode=crop&width=3328&height=1864&rnd=132338421781900000"
-        },
-        { id: "123",src:'https://www.designhotels.com/media/hvce4cdy/01-cretanmalia-agapi-costantza-sbokou-pier.jpg?center=0.509627971580746,0.21166666666666667&mode=crop&width=3328&height=1864&rnd=132338421781900000' },
-        { id: "123" },
+        {a: "123",},
+        { a: "123" },
+        { a: "123" },
       ],
-         ishover: false,
+      ishover: false,
         screenWeight: 0,    // 屏幕宽度
         screenHeight: 0,    // 屏幕高度
         index: 1,        // 用于判断翻页
@@ -192,9 +198,10 @@ export default {
       }
   },
   mounted(){
+      this.$nextTick(function(){
       this.screenWeight = document.documentElement.clientWidth;
       this.screenHeight = document.documentElement.clientHeight;
-            this.screenHeight = this.screenHeight-160;
+            // this.screenHeight = this.screenHeight-300;
        
       this.main = document.getElementById("main");
       this.obj = document.getElementsByTagName("div");
@@ -219,6 +226,7 @@ export default {
       } else {
         document.onmousewheel = this.scrollFun;
       }
+         })
     },
      
 };
@@ -227,30 +235,4 @@ export default {
 
 <style>
 @import "home.css";
-  
-  #wrap {
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  #main {
-    position: relative;
-    transition:top 1s;
-  }
-  
-  .page {
-    /*谨删*/
-    width: 100%;
-    margin: 0;
-  }
-  
-  #pageUl {
-    position: fixed;
-    right: 10px;
-    bottom: 50%;
-  }
-  
-  .active{
-    color: red;
-  }
 </style>
