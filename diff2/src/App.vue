@@ -22,15 +22,16 @@ export default {
 <style>
 @import "./assets/css/main.css";
 #app {
-  font-family: "Microsoft YaHei","Microsoft JhengHei";
+  /* font-family: "Microsoft YaHei","Microsoft JhengHei"; */
+  font-family:  Verdana, Geneva, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.app_router{
+/* .app_router{
   margin: 30px auto;
   width: 100%;
   text-align: center;
-}
+} */
 .app_router a{
   font-size: 2rem;
   font-weight: bold;

@@ -1,3 +1,6 @@
+.home-container{
+  overflow-x: hidden;
+}
 .home_header{
 
     height: 120px;
@@ -120,6 +123,7 @@
       font-size: 1.5rem;
       float: left;
       width: 100%;
+      line-height: 5rem;
   }
   .top-bar{
     position: absolute;
@@ -128,7 +132,7 @@
     right: 0;
     bottom: 0;
     width: 300px;
-    height: 100px;
+    height:60px;
   }
   .top-bar ul li{
       float: left;
@@ -222,3 +226,352 @@
         transform: translateY(0px);
     }
   }
+  .home_user_img {
+    float: right;
+    margin-right: 20px;
+    margin-top: -60px;
+     width: 30px;
+     padding-top:30px;
+     border-radius: 50%;
+     -webkit-border-radius: 50%;
+    -moz-border-radius:50%;
+     position: relative;
+  }
+  .home_user_img img{
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    width: 100%;
+    height: 100%;
+  }
+  .open-silder-btn{
+    display: block;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    left: 20px;
+    top: 73px;
+  }
+  .bar1{
+    width: 20px;
+    height:4px;
+    background-color: #000;
+    border-radius: 100px;
+  }
+  .bar2{
+    width: 30px;
+    height:4px;
+    background-color: #000;
+    border-radius: 100px;
+    margin: 5px 0;
+  }
+  .bar3{
+    width: 40px;
+    height:4px;
+    background-color: #000;
+    border-radius: 100px;
+  }
+  .change .bar1{
+   -webkit-transform: rotate(-45deg) translate(-12px,8px);
+    transform: rotate(-45deg) translate(-12px,8px);
+    -webkit-transition: 1s;
+    transition: 1s;
+    width: 40px;
+  }
+  .change .bar3{
+    -webkit-transform: rotate(45deg) translate(-4px,-1px);
+    transform: rotate(45deg) translate(-4px,-1px);
+    -webkit-transition: 1s;
+    transition: 1s;
+
+  }
+  .change .bar2{
+    -webkit-animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: slide-out-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  
+  
+  }
+
+  @-webkit-keyframes slide-out-right {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateX(-1000px);
+              transform: translateX(-1000px);
+      opacity: 0;
+    }
+  }
+  @keyframes slide-out-right {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateX(-1000px);
+              transform: translateX(-1000px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes nav-slide-in-left{
+    0%{
+      -webkit-transform: translateX(-50px);
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+    100%{
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes nav-slide-in-left{
+    0%{
+      -webkit-transform: translateX(-50px);
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+    100%{
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes nav-slide-out-left{
+    0%{
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px);
+      opacity: 1;
+    }
+    100%{
+      -webkit-transform: translateX(-100px);
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+  }
+  @keyframes nav-slide-out-left{
+    0%{
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px);
+      opacity: 1;
+    }
+    100%{
+      -webkit-transform: translateX(-100px);
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+  }
+  /* 侧边栏 */
+  .navleft-out{ 
+    -webkit-animation: nav-slide-out-left .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: nav-slide-out-left .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  }
+  .navleft-in{
+    -webkit-animation: nav-slide-in-left 1s cubic-bezier(0.01, 0.19, 0.3, 0.5) both;
+    animation: nav-slide-in-left 1s cubic-bezier(0.01, 0.19, 0.3, 0.5) both;
+  }
+  .navigation {
+    position: fixed;
+    top: 114px;
+    left: 8px;
+    bottom: 20px;
+    margin: 10px;
+    width: 300px;
+    border-radius: 10px;
+    background-color: #000;
+    transition: 0.5s;
+    z-index: 100;
+}
+
+.navigation .zoom {
+    position: absolute;
+    right: 0px;
+    height: 60px;
+    width: 100%;
+    transition: all 0.5s;
+}
+
+.navigation .zoom span {
+    position: relative;
+    top: 10px;
+    left: 15px;
+
+    height: 100%;
+    width: 100%;
+
+    font-size: 2em;
+    color: #fff;
+
+    /* 在此处防止文字被从新排版 */
+    flex-shrink: 0;
+    opacity: 1;
+
+    /* 动画 */
+    transition: all .2s;
+}
+
+.navigation.zoom .zoom span {
+    position: absolute;
+
+    right: 0px;
+
+    height: 100%;
+    width: 100%;
+
+
+    /* 透明度 */
+    opacity: 0;
+
+    /* 过度动画 */
+    transition: all .2s;
+}
+
+.navigation .zoom i{
+    position: absolute;
+    right: 0px;
+    top: 5px;
+
+    /* 居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    height: 50px;
+    width: 50px;
+
+    color: #f9e459;
+    font-size: 2em;
+
+    transition: all 0.5s;
+}
+
+.navigation.zoom {
+    width: 50px;
+}
+
+.navigation.zoom .zoom i {
+    /* 180足以，540（等与360+180）为了让其更跳脱 */
+    transform: rotate(540deg);
+    color: #fff;
+}
+
+
+.navigation ul {
+    margin-left: 5px;
+    margin-top: 50px;
+}
+
+.navigation ul li {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    height: 60px;
+
+    list-style: none;
+    transition: all 1s;
+}
+
+.navigation ul li div {
+    float: right;
+    position: absolute;
+    right: 0px;
+
+    margin: 20px 0px;
+    height: 100%;
+    width: 0%;
+
+
+    border-radius: 100px 0 0 100px;
+    background: #fff;
+
+    transition: all 0.5s;
+}
+
+.navigation ul li .active {
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+
+    border-radius: 100px 0 0 100px;
+    background: #fff;
+}
+
+.navigation ul li div::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    height: 10px;
+    width: 100%;
+    border-radius: 0 0 10px 0;
+    background-color: #000;
+}
+
+.navigation ul li div::after {
+    content: "";
+    position: absolute;
+
+    bottom: 0px;
+    height: 10px;
+    width: 100%;
+
+    border-radius: 0 10px 0 0;
+    background-color: #000;
+}
+
+.navigation ul li a {
+    transition: all 0.5s;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.navigation ul li.active a {
+    color: #4d5bf9;
+    flex-shrink: 0;
+}
+
+
+.navigation ul li a .icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+    height: 100%;
+    width: 40px;
+}
+
+.navigation ul li a .title {
+    opacity: 1;
+    /* 在此处防止文字被从新排版 */
+    flex-shrink: 0;
+    transition: all .2s;
+}
+
+.navigation.zoom ul li a .title {
+    opacity: 0;
+}
+
+
+  /* 侧边栏 */
+  

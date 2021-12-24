@@ -1,126 +1,122 @@
 <template>
   <div class="home-container" style="">
-      <div class="home_header" >
-    <div class="home_search">
-      <input type="text" placeholder="Search..." />
-      <div class="search"></div>
+    <div class="home_header">
+      <div class="home_search">
+        <input type="text" placeholder="Search..." />
+        <div class="search"></div>
+      </div>
+      <div class="home_title_text">
+        Today see what is different from the past
+        <div class="btn"></div>
+      </div>
+      <div class="top-bar">
+        <ul>
+          <li><router-link to="/scroll">过去</router-link></li>
+          <li><router-link to="/">现在</router-link></li>
+          <li><router-link to="/about">将来 </router-link></li>
+        </ul>
+      </div>
+
+      <div class="home_user_img">
+        <img
+          src="https://www.designhotels.com/media/hvce4cdy/01-cretanmalia-agapi-costantza-sbokou-pier.jpg?center=0.509627971580746,0.21166666666666667&mode=crop&width=3328&height=1864&rnd=132338421781900000"
+          alt=""
+        />
+      </div>
+      <div
+        :class="{ change: isChange }"
+        class="open-silder-btn"
+        @click="isChange = !isChange,isShowSlide = true"
+      >
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <div class="clear"></div>
     </div>
-    <div class="home_title_text">Today see what is different from the past</div>
-    <div class="top-bar">
+    <div id="wrap" :style="{ height: screenHeight + 'px' }">
+      <div id="main" :style="{ top: nowTop + 'px' }">
+        <div v-for="(item, index) in list" :key="index" id="page1" class="page">
+          <div class="home_box">
+            <div class="box-item-group" @mouseenter="enter" @mouseleave="leave">
+              <el-row>
+                <el-col :span="12" class="box-item-cell">
+                  <div class="box-item">
+                    <img
+                      class="box-item-img"
+                      :src="item.old_image"
+                      alt=""
+                      :style="{ height: screenHeight + 'px' }"
+                    />
+                  </div>
+                  <div class="box-item-section">
+                    <div class="box-item-title">
+                      {{ item.old_time | showOldTime }}
+                    </div>
+                  </div>
+                  <transition name="bounce">
+                    <div class="box-item-msg" v-show="ishover">
+                      <div class="introduce">
+                        在地球陆地表面起伏的山峦中，有很多都被塑造出了独特的形状，
+                        在这些形状独特的山中，有一种山壁如刀削，形似板薄，被称为墙状山
+                        。在美国西部的国家公园中，就发育有非常典型的红层墙状山，在世界其他地方也能找到类似的山。
+                        中国几乎拥有所有的地貌类型，那么中国有没有墙状山，中国的墙状山分布在哪里，
+                        它们又有什么特点呢？四川省地矿局的教授级高级工程师范晓就为我们做出了解读。
+                      </div>
+                      <div class="address">
+                        <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                        <p>四川省香格里拉木桥边</p>
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                  </transition>
+                </el-col>
+                <el-col :span="12" class="box-item-cell">
+                  <div class="box-item">
+                    <img
+                      class="box-item-img"
+                      :src="item.now_image"
+                      alt=""
+                      :style="{ height: screenHeight + 'px' }"
+                    />
+                  </div>
+                  <div class="box-item-section">
+                    <div class="box-item-title">
+                      {{ item.now_time | showNowTime }}
+                    </div>
+                  </div>
+                </el-col>
+                <div></div>
+              </el-row>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div v-if="isShowSlide"  class="navigation" :class="[isZoom ? 'zoom' : '',isChange ? 'navleft-in':'navleft-out']"> 
+      <div class="zoom" @click="isZoom = !isZoom">
+        <span>WORM</span>
+        <!-- <ion-icon name="caret-back-outline"></ion-icon> -->
+        <i class="icon ion-play"></i> 
+      </div> 
       <ul>
-        <li><router-link to="/scroll">过去</router-link></li>
-        <li><router-link to="/">现在</router-link></li>
-        <li><router-link to="/about">将来</router-link></li>
+        <li
+          v-for="(item, index) in menuList"
+          :key="index"
+          @click="click(item)"
+          :class="item.name == active ? 'active' : ''"
+        >
+          <div class="" :class="item.name == active ? 'active' : ''"></div>
+          <a href="#">
+            <span class="icon">
+              <!-- <ion-icon :name="item.icon"></ion-icon> -->
+              <i class="icon ion-home"></i>
+            </span>
+            <span class="title">{{ item.name }}</span>
+          </a>
+        </li>
       </ul>
     </div>
-    <div class="clear"></div>
-</div>
-      <div id="wrap" :style="{ height: screenHeight + 'px' }">
-      <div id="main" :style="{ top: nowTop + 'px' }">
-
-      <div v-for="(item,index) in list" :key='index' style="background-color: #1b6d85" id="page1" class="page">
-  
-    <div class="home_box" >
-        <div class="box-item-group"  @mouseenter="enter" @mouseleave="leave">
-      <el-row>
-        <el-col :span="12" class="box-item-cell">
-          <div class="box-item">
-            <img
-              class="box-item-img"
-              :src="item.old_image"
-              alt=""
-               :style="{ height: screenHeight + 'px' }"
-            />
-          </div>
-          <div class="box-item-section">
-            <div class="box-item-title">1998/3/18 凌晨</div>
-          </div>
-          <transition name="bounce">
-          <div class="box-item-msg" v-show="ishover">
-            <div class="introduce">
-              在地球陆地表面起伏的山峦中，有很多都被塑造出了独特的形状，
-              在这些形状独特的山中，有一种山壁如刀削，形似板薄，被称为墙状山
-              。在美国西部的国家公园中，就发育有非常典型的红层墙状山，在世界其他地方也能找到类似的山。
-              中国几乎拥有所有的地貌类型，那么中国有没有墙状山，中国的墙状山分布在哪里，
-              它们又有什么特点呢？四川省地矿局的教授级高级工程师范晓就为我们做出了解读。
-            </div>
-            <div class="address">
-              <i class="fa fa-location-arrow" aria-hidden="true"></i>
-              <p>四川省香格里拉木桥边</p>
-            </div>
-            <div class="clear"></div>
-          </div>
-          </transition>
-        </el-col>
-        <el-col :span="12" class="box-item-cell">
-          <div class="box-item">
-            <img
-              class="box-item-img"
-              :src="item.now_image"
-              alt=""
-              :style="{ height: screenHeight + 'px' }"
-            />
-          </div>
-          <div class="box-item-section">
-            <div class="box-item-title">1998/3/18 凌晨</div>
-          </div>
-        </el-col>
-        <div></div>
-      </el-row>
-      </div>
-    </div>
-      </div>
-     
-    </div>
-  </div>
-<!-- 
-    <div class="home_box">
-        <div class="box-item-group" v-for="(item,index) in list" :key="index" @mouseenter="enter" @mouseleave="leave">
-      <el-row>
-        <el-col :span="12" class="box-item-cell">
-          <div class="box-item">
-            <img
-              class="box-item-img"
-              src="https://www.designhotels.com/media/rmijxduy/popular-theme-city-teaser.jpg?anchor=center&mode=crop&width=768&height=750&rnd=132314200954500000s"
-              alt=""
-            />
-          </div>
-          <div class="box-item-section">
-            <div class="box-item-title">1998/3/18 凌晨</div>
-          </div>
-          <transition name="bounce">
-          <div class="box-item-msg" v-show="ishover">
-            <div class="introduce">
-              在地球陆地表面起伏的山峦中，有很多都被塑造出了独特的形状，
-              在这些形状独特的山中，有一种山壁如刀削，形似板薄，被称为墙状山
-              。在美国西部的国家公园中，就发育有非常典型的红层墙状山，在世界其他地方也能找到类似的山。
-              中国几乎拥有所有的地貌类型，那么中国有没有墙状山，中国的墙状山分布在哪里，
-              它们又有什么特点呢？四川省地矿局的教授级高级工程师范晓就为我们做出了解读。
-            </div>
-            <div class="address">
-              <i class="fa fa-location-arrow" aria-hidden="true"></i>
-              <p>四川省香格里拉木桥边</p>
-            </div>
-            <div class="clear"></div>
-          </div>
-          </transition>
-        </el-col>
-        <el-col :span="12" class="box-item-cell">
-          <div class="box-item">
-            <img
-              class="box-item-img"
-              src="https://www.designhotels.com/media/rmijxduy/popular-theme-city-teaser.jpg?anchor=center&mode=crop&width=768&height=750&rnd=132314200954500000s"
-              alt=""
-            />
-          </div>
-          <div class="box-item-section">
-            <div class="box-item-title">1998/3/18 凌晨</div>
-          </div>
-        </el-col>
-        <div></div>
-      </el-row>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -130,31 +126,59 @@ export default {
   data() {
     return {
       list: [
-        {id:"123",
-        old_image:'https://www.designhotels.com/media/rmijxduy/popular-theme-city-teaser.jpg?anchor=center&mode=crop&width=768&height=750&rnd=132314200954500000s',
-        now_image:"https://www.designhotels.com/media/hvce4cdy/01-cretanmalia-agapi-costantza-sbokou-pier.jpg?center=0.509627971580746,0.21166666666666667&mode=crop&width=3328&height=1864&rnd=132338421781900000"
+        {
+          id: "1",
+          old_time: "",
+          now_time: "2021/10/10",
+          old_image:
+            "https://www.designhotels.com/media/rmijxduy/popular-theme-city-teaser.jpg?anchor=center&mode=crop&width=768&height=750&rnd=132314200954500000s",
+          now_image:
+            "https://www.designhotels.com/media/hvce4cdy/01-cretanmalia-agapi-costantza-sbokou-pier.jpg?center=0.509627971580746,0.21166666666666667&mode=crop&width=3328&height=1864&rnd=132338421781900000",
         },
-        { id: "123",src:'https://www.designhotels.com/media/hvce4cdy/01-cretanmalia-agapi-costantza-sbokou-pier.jpg?center=0.509627971580746,0.21166666666666667&mode=crop&width=3328&height=1864&rnd=132338421781900000' },
+        {
+          id: "2",
+          old_time: "1987",
+          now_time: "",
+          old_image: require("../../assets/img/home/shanghai-pass.jpg"),
+          now_image: require("../../assets/img/home/shanghai-now.jpg"),
+        },
         { id: "123" },
       ],
-         ishover: false,
-        screenWeight: 0,    // 屏幕宽度
-        screenHeight: 0,    // 屏幕高度
-        index: 1,        // 用于判断翻页
-        curIndex: 1,      // 当前页的index
-        startTime: 0,      // 翻屏起始时间 
-        endTime: 0,       // 上一次翻屏结束时间
-        nowTop: 0,       // 翻屏后top的位置
-        pageNum: 0,       // 一共有多少页
-        main: Object,
-        obj: Object
+      //翻页
+      ishover: false,
+      screenWeight: 0, // 屏幕宽度
+      screenHeight: 0, // 屏幕高度
+      index: 1, // 用于判断翻页
+      curIndex: 1, // 当前页的index
+      startTime: 0, // 翻屏起始时间
+      endTime: 0, // 上一次翻屏结束时间
+      nowTop: 0, // 翻屏后top的位置
+      pageNum: 0, // 一共有多少页
+      main: Object,
+      obj: Object,
+      // 侧边栏按钮状态 
+      isChange: false,
+      isShowSlide:false,
+      //侧边栏
+      isZoom: true,
+      active: "主页",
+      menuList: [
+        { name: "主页", icon: "home" },
+        { name: "我的", icon: "person-circle-outline" },
+        { name: "设置", icon: "settings-outline" },
+        { name: "退出", icon: "exit-outline" },
+        { name: "帮助", icon: "help-outline" },
+      ],
     };
   },
   created() {
-
+   
   },
 
   methods: {
+
+  
+    //鼠标移动至图片上
     enter() {
       this.ishover = true;
     },
@@ -162,95 +186,116 @@ export default {
       this.ishover = false;
     },
     //翻页
-     scrollFun(event) {
-        this.startTime = new Date().getTime();
-        // mousewheel事件中的 “event.wheelDelta” 属性值：返回的如果是正值说明滚轮是向上滚动
-        // DOMMouseScroll事件中的 “event.detail” 属性值：返回的如果是负值说明滚轮是向上滚动
-        let delta = event.detail || (-event.wheelDelta);
-        // 如果当前滚动开始时间和上次滚动结束时间的差值小于1.5s，则不执行翻页动作，这样做是为了实现类似节流的效果
-        if ((this.startTime - this.endTime) > 1500) {
-          if (delta > 0 && parseInt(this.main.offsetTop) >= -(this.screenHeight * (this.pageNum - 2))) {
-            // 向下滚动
-            this.index++;
-            this.toPage(this.index);
-          }else if (delta < 0 && parseInt(this.main.offsetTop) < 0) {
-            // 向上滚动
-            this.index--;
-            this.toPage(this.index);
-          }
-          // 本次翻页结束，记录结束时间，用于下次判断
-          this.endTime = new Date().getTime();
+    scrollFun(event) {
+      this.startTime = new Date().getTime();
+      // mousewheel事件中的 “event.wheelDelta” 属性值：返回的如果是正值说明滚轮是向上滚动
+      // DOMMouseScroll事件中的 “event.detail” 属性值：返回的如果是负值说明滚轮是向上滚动
+      let delta = event.detail || -event.wheelDelta;
+      // 如果当前滚动开始时间和上次滚动结束时间的差值小于1.5s，则不执行翻页动作，这样做是为了实现类似节流的效果
+      if (this.startTime - this.endTime > 500) {
+        if (
+          delta > 0 &&
+          parseInt(this.main.offsetTop) >=
+            -(this.screenHeight * (this.pageNum - 2))
+        ) {
+          // 向下滚动
+          this.index++;
+          this.toPage(this.index);
+        } else if (delta < 0 && parseInt(this.main.offsetTop) < 0) {
+          // 向上滚动
+          this.index--;
+          this.toPage(this.index);
         }
-      },
-      // 翻页
-      toPage(index) {
-        if (index != this.curIndex) {
-          let delta = index - this.curIndex;
-          this.nowTop = this.nowTop - delta * this.screenHeight;
-          this.curIndex = index;
-        }
-      }
-  },
-  mounted(){
-      this.screenWeight = document.documentElement.clientWidth;
-      this.screenHeight = document.documentElement.clientHeight;
-            this.screenHeight = this.screenHeight-160;
-       
-      this.main = document.getElementById("main");
-      this.obj = document.getElementsByTagName("div");
-      for (let i = 0; i < this.obj.length; i++) {
-        if (this.obj[i].className == 'page') {
-          this.obj[i].style.height = this.screenHeight + "px";
-        }
-      }
-      this.pageNum = document.querySelectorAll(".page").length;
-
-  
-      // 浏览器兼容   
-      if ((navigator.userAgent.toLowerCase().indexOf("firefox") != -1)) {  
-        document.addEventListener("DOMMouseScroll", this.scrollFun, false);
-            
-      } else if (document.addEventListener) {
-        document.addEventListener("mousewheel", this.scrollFun, false);
-      
-      } else if (document.attachEvent) {
-        document.attachEvent("onmousewheel", this.scrollFun);
-                  
-      } else {
-        document.onmousewheel = this.scrollFun;
+        // 本次翻页结束，记录结束时间，用于下次判断
+        this.endTime = new Date().getTime();
       }
     },
-     
+    // 翻页
+    toPage(index) {
+      if (index != this.curIndex) {
+        let delta = index - this.curIndex;
+        this.nowTop = this.nowTop - delta * this.screenHeight;
+        this.curIndex = index;
+      }
+    },
+    //侧边栏选中
+       click(item) {
+          this.active = item.name;
+      }
+  },
+  mounted() {
+    this.screenWeight = document.documentElement.clientWidth;
+    this.screenHeight = document.documentElement.clientHeight;
+    this.screenHeight = this.screenHeight - 160;
+
+    this.main = document.getElementById("main");
+    this.obj = document.getElementsByTagName("div");
+    for (let i = 0; i < this.obj.length; i++) {
+      if (this.obj[i].className == "page") {
+        this.obj[i].style.height = this.screenHeight + "px";
+      }
+    }
+    this.pageNum = document.querySelectorAll(".page").length;
+
+    // 浏览器兼容
+    if (navigator.userAgent.toLowerCase().indexOf("firefox") != -1) {
+      document.addEventListener("DOMMouseScroll", this.scrollFun, false);
+    } else if (document.addEventListener) {
+      document.addEventListener("mousewheel", this.scrollFun, false);
+    } else if (document.attachEvent) {
+      document.attachEvent("onmousewheel", this.scrollFun);
+    } else {
+      document.onmousewheel = this.scrollFun;
+    }
+   
+  },
+  filters: {
+    showOldTime(old_time) {
+      if (old_time == "" || old_time == undefined || old_time == null) {
+        return (old_time = "时间不详");
+      } else {
+        return old_time;
+      }
+    },
+    showNowTime(now_time) {
+      if (now_time == "" || now_time == undefined || now_time == null) {
+        return (now_time = "现在");
+      } else {
+        return now_time;
+      }
+    },
+  },
 };
 </script>
 
 
 <style>
+@import url("https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css");
 @import "home.css";
-  
-  #wrap {
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  #main {
-    position: relative;
-    transition:top 1s;
-  }
-  
-  .page {
-    /*谨删*/
-    width: 100%;
-    margin: 0;
-  }
-  
-  #pageUl {
-    position: fixed;
-    right: 10px;
-    bottom: 50%;
-  }
-  
-  .active{
-    color: red;
-  }
+
+#wrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+#main {
+  position: relative;
+  transition: top 0.3s;
+}
+
+.page {
+  /*谨删*/
+  width: 100%;
+  margin: 0;
+}
+
+#pageUl {
+  position: fixed;
+  right: 10px;
+  bottom: 50%;
+}
+
+.active {
+  color: red;
+}
 </style>
