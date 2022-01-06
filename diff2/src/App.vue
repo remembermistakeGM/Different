@@ -21,6 +21,7 @@ export default {
 
 <style>
 @import "./assets/css/main.css";
+@import url("https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css");
 #app {
   /* font-family: "Microsoft YaHei","Microsoft JhengHei"; */
   font-family:  Verdana, Geneva, sans-serif;

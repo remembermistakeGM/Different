@@ -333,7 +333,7 @@
       transform: translateX(0px);
       opacity: 1;
     }
-  }
+  } 
   @-webkit-keyframes nav-slide-in-left{
     0%{
       -webkit-transform: translateX(-50px);
@@ -439,17 +439,13 @@
     position: absolute;
     right: 0px;
     top: 5px;
-
     /* 居中 */
     display: flex;
     justify-content: center;
     align-items: center;
-
-
     height: 50px;
     width: 50px;
-
-    color: #f9e459;
+    color: #fff;
     font-size: 2em;
 
     transition: all 0.5s;
@@ -475,70 +471,72 @@
     position: relative;
     display: flex;
     align-items: center;
-
     height: 60px;
-
     list-style: none;
     transition: all 1s;
+    z-index: 2;
 }
 
 .navigation ul li div {
     float: right;
     position: absolute;
     right: 0px;
-
     margin: 20px 0px;
     height: 100%;
-    width: 0%;
-
-
+    width: 100%;
     border-radius: 100px 0 0 100px;
-    background: #fff;
-
     transition: all 0.5s;
 }
-
-.navigation ul li .active {
+/* .navigation ul li .active {
     position: absolute;
-
     height: 100%;
     width: 100%;
-
     border-radius: 100px 0 0 100px;
     background: #fff;
+} */
+.navigation ul li .active {}
+
+@keyframes silder_active{
+    
 }
 
 .navigation ul li div::before {
-    content: "";
+    /* content: "";
     position: absolute;
     top: 0px;
     height: 10px;
     width: 100%;
     border-radius: 0 0 10px 0;
-    background-color: #000;
+    background-color: #000; */
 }
 
-.navigation ul li div::after {
+/* .navigation ul li div::after {
     content: "";
     position: absolute;
-
     bottom: 0px;
     height: 10px;
     width: 100%;
-
     border-radius: 0 10px 0 0;
     background-color: #000;
+} */
+.marker{
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  transition: all 500ms;
+  z-index:1;
+  border-radius: 10px;
 }
-
 .navigation ul li a {
     transition: all 0.5s;
     position: relative;
     display: flex;
     align-items: center;
-
     height: 100%;
     width: 100%;
-
     text-decoration: none;
     font-size: 1.5em;
     color: #fff;

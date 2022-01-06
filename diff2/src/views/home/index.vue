@@ -6,7 +6,7 @@
         <div class="search"></div>
       </div>
       <div class="home_title_text">
-        Today see what is different from the past
+        时间给我们留下了什么？
         <div class="btn"></div>
       </div>
       <div class="top-bar">
@@ -17,7 +17,7 @@
         </ul>
       </div>
 
-      <div class="home_user_img">
+      <div class="home_user_img" @click='toUser'>
         <img
           src="https://www.designhotels.com/media/hvce4cdy/01-cretanmalia-agapi-costantza-sbokou-pier.jpg?center=0.509627971580746,0.21166666666666667&mode=crop&width=3328&height=1864&rnd=132338421781900000"
           alt=""
@@ -54,18 +54,14 @@
                       {{ item.old_time | showOldTime }}
                     </div>
                   </div>
-                  <transition name="bounce">
-                    <div class="box-item-msg" v-show="ishover">
+                  <transition name="bounce" >
+                    <div class="box-item-msg" v-show="ishover" v-if="item.description !==''">
                       <div class="introduce">
-                        在地球陆地表面起伏的山峦中，有很多都被塑造出了独特的形状，
-                        在这些形状独特的山中，有一种山壁如刀削，形似板薄，被称为墙状山
-                        。在美国西部的国家公园中，就发育有非常典型的红层墙状山，在世界其他地方也能找到类似的山。
-                        中国几乎拥有所有的地貌类型，那么中国有没有墙状山，中国的墙状山分布在哪里，
-                        它们又有什么特点呢？四川省地矿局的教授级高级工程师范晓就为我们做出了解读。
+                        {{item.description}}
                       </div>
-                      <div class="address">
+                      <div class="address" v-if="item.address !==''">
                         <i class="fa fa-location-arrow" aria-hidden="true"></i>
-                        <p>四川省香格里拉木桥边</p>
+                        <p>{{item.address}}</p>
                       </div>
                       <div class="clear"></div>
                     </div>
@@ -95,31 +91,32 @@
     </div>  
     <div v-if="isShowSlide"  class="navigation" :class="[isZoom ? 'zoom' : '',isChange ? 'navleft-in':'navleft-out']"> 
       <div class="zoom" @click="isZoom = !isZoom">
-        <span>WORM</span>
-        <!-- <ion-icon name="caret-back-outline"></ion-icon> -->
+        <span></span>
         <i class="icon ion-play"></i> 
       </div> 
       <ul>
         <li
           v-for="(item, index) in menuList"
           :key="index"
-          @click="click(item)"
+          @click="click(item,index)"
           :class="item.name == active ? 'active' : ''"
+          ref='li'
         >
           <div class="" :class="item.name == active ? 'active' : ''"></div>
           <a href="#">
             <span class="icon">
               <!-- <ion-icon :name="item.icon"></ion-icon> -->
-              <i class="icon ion-home"></i>
+              <i class="icon" :class="item.icon"></i>
             </span>
             <span class="title">{{ item.name }}</span>
           </a>
-        </li>
+        </li> 
+        <div class="marker" ref="marker"></div>
       </ul>
     </div>
   </div>
 </template>
-
+ 
 <script>
 export default {
   name: "Home",
@@ -129,20 +126,42 @@ export default {
         {
           id: "1",
           old_time: "",
-          now_time: "2021/10/10",
-          old_image:
-            "https://www.designhotels.com/media/rmijxduy/popular-theme-city-teaser.jpg?anchor=center&mode=crop&width=768&height=750&rnd=132314200954500000s",
-          now_image:
-            "https://www.designhotels.com/media/hvce4cdy/01-cretanmalia-agapi-costantza-sbokou-pier.jpg?center=0.509627971580746,0.21166666666666667&mode=crop&width=3328&height=1864&rnd=132338421781900000",
-        },
+          now_time: "",
+          old_image: require("../../assets/img/home/77c6a7efce1b9d16f10.png"),
+          now_image: require("../../assets/img/home/77c6a7efce1b9d16f101.png"),
+          description:"40年后...",
+          address:""
+       },
+       
+ 
         {
           id: "2",
           old_time: "1987",
           now_time: "",
           old_image: require("../../assets/img/home/shanghai-pass.jpg"),
           now_image: require("../../assets/img/home/shanghai-now.jpg"),
+           description:"",
+          address:"上海滩"
         },
-        { id: "123" },
+          {
+          id: "3",
+          old_time: "",
+          now_time: "",
+          old_image: require("../../assets/img/home/0dd7912397dda.png"),
+          now_image: require("../../assets/img/home/0dd7912397dda1.png"),
+          description:"浴缸的兄弟,相隔20年",
+          address:""
+        }, 
+         {
+          id: "4",
+          old_time: "1982",
+          now_time: "2012",
+          old_image: require("../../assets/img/home/023b5bb5c9ea.png"),
+          now_image: require("../../assets/img/home/023b5bb5c9ea1.png"),
+          description:"从 1982 年到 2012 年，每五年就有五名男子在加利福尼亚科普柯湖的小屋里拍摄同一张照片",
+          address:""
+        },  
+        
       ],
       //翻页
       ishover: false,
@@ -161,23 +180,21 @@ export default {
       isShowSlide:false,
       //侧边栏
       isZoom: true,
-      active: "主页",
+      active: "主页", 
       menuList: [
-        { name: "主页", icon: "home" },
-        { name: "我的", icon: "person-circle-outline" },
-        { name: "设置", icon: "settings-outline" },
-        { name: "退出", icon: "exit-outline" },
-        { name: "帮助", icon: "help-outline" },
+        { name: "主页", icon: "ion-flag" },
+        { name: "我的", icon: "ion-person" },
+        { name: "发布", icon: "ion-android-add-circle" },
+        { name: "帮助", icon: "ion-help-circled" },
       ],
     };
   },
   created() {
-   
+    
   },
 
   methods: {
 
-  
     //鼠标移动至图片上
     enter() {
       this.ishover = true;
@@ -206,7 +223,7 @@ export default {
           this.index--;
           this.toPage(this.index);
         }
-        // 本次翻页结束，记录结束时间，用于下次判断
+        // 本次翻页结束，记录结束时间，用于下次判断 
         this.endTime = new Date().getTime();
       }
     },
@@ -218,10 +235,18 @@ export default {
         this.curIndex = index;
       }
     },
-    //侧边栏选中
-       click(item) {
+    //侧边栏选中  
+       click(item,index) {
           this.active = item.name;
-      }
+          let marker =this.$refs.marker
+            marker.style.top =60*(index+1)+"px";
+      },
+
+      //点击头像
+       toUser(){
+
+       this.$router.replace('/user')
+       }
   },
   mounted() {
     this.screenWeight = document.documentElement.clientWidth;
@@ -270,7 +295,6 @@ export default {
 
 
 <style>
-@import url("https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css");
 @import "home.css";
 
 #wrap {
@@ -284,7 +308,7 @@ export default {
 }
 
 .page {
-  /*谨删*/
+  /*谨删*/ 
   width: 100%;
   margin: 0;
 }

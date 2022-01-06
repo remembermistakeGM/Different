@@ -20,8 +20,18 @@ const routes = [
   },
   {
     path:'/scroll',
-    name:"Scroll",
+    name:"Scroll", //首页翻页
     component:() => import('../views/home/scroll.vue')
+  },
+  {
+    path:'/user',
+    name:"User", //个人中心
+    component:() => import('../views/user/user.vue')
+  },
+  {
+    path:'/register',
+    name:"Register", //个人中心
+    component:() => import('../views/user/register.vue')
   }
 ]
 
