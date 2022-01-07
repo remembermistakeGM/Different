@@ -4,7 +4,9 @@
         <div class="reg-text-msg">
         <div class="text1">欢迎您加入我们</div>
         <div class="text2">一起看看世界</div>
-      <div class="login-btn"><el-button type='info'>登录</el-button></div>
+ 
+      <div class="login-btn">    <router-link  to="/login"><el-button type='info'>登录</el-button>      </router-link></div>
+
       </div>
        <img class="svg_bg_img" :class="isfocus ? '':'svg_bg_img_left'" src="../../assets/img/svg/undraw_environment_iaus.svg" alt="">
      </div>
@@ -93,7 +95,7 @@ export default {
   background-color: transparent;
  height: 50px;
  border: none;
- font-size: 1rem;
+ font-size: 1.3rem;
  font-weight: 600;
  color: #000;
 }
@@ -126,7 +128,7 @@ export default {
   margin-top: .3rem;
 }
 .reg-text-msg button{
-  margin-top: 30px;
+  margin-top: 67px;
   margin-left: 20%;
 }
 @media screen and (max-width:770px){

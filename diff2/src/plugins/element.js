@@ -4,6 +4,7 @@ import {
     Row,
     Col,
     Input,
+    DatePicker
 
 
 } from 'element-ui'
@@ -12,4 +13,5 @@ Vue.use(Button)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Input)
+Vue.use(DatePicker)
 
